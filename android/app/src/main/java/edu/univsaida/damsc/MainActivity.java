@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package edu.univsaida.damsc;
 
 import android.os.Bundle;
 

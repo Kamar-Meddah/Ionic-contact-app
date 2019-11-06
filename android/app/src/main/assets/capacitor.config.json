@@ -1,18 +1,8 @@
 {
-  "appId": "edu.univ-saida.damsc",
+  "appId": "edu.univsaida.damsc",
   "appName": "tpdamc",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
-  "cordova": {},
-  "plugins": {
-    "SplashScreen": {
-      "launchAutoHide": true,
-      "launchShowDuration": 1000
-    }
-  },
-  "server": {
-    "url": "http://192.168.1.3:8100",
-    "originalUrl": "http://192.168.1.3:8100"
-  }
+  "cordova": {}
 }

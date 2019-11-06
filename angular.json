@@ -90,6 +90,7 @@
             },
             "hmr": {
               "hmr": true,
+              "hmrWarning": false,
               "browserTarget": "app:build:hmr"
             },
             "ci": {

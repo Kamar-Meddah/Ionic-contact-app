@@ -6,7 +6,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "hmr": "ionic capacitor run android -l --external --configuration hmr",
+    "hmr:android": "ionic capacitor run android -l --external --configuration hmr",
+    "hmr": "ionic serve -l --external --configuration hmr",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
