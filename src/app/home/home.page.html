@@ -1,17 +1,26 @@
 <ion-header>
-  <ion-toolbar color="secondary">
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>
-      Contact App
-    </ion-title>
+      <ion-row>
+          <ion-title>
+              Contacts
+          </ion-title>
+      </ion-row>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="ion-padding">
-    <a routerLink="/about">about</a>
-    <p>If you get lost, the <a target="_blank" rel="noopener" routerLink="/about">docs</a> will be your guide.</p>
+
+
   </div>
+
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button color="primary" routerLink="/add-contact">
+      <ion-icon  name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>
