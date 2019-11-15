@@ -4,11 +4,11 @@ import {Observable} from 'rxjs';
 import {Contact} from '../models/contact.model';
 import {AlertController, Platform, PopoverController} from '@ionic/angular';
 import {ContactActionsComponent} from './components/contact-actions/contact-actions.component';
-import {HapticsImpactStyle, Plugins} from '@capacitor/core';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {Plugins} from '@capacitor/core';
 
-const {Haptics} = Plugins;
+const {Modals, Haptics} = Plugins;
 
 @Component({
   selector: 'app-home',
@@ -47,9 +47,7 @@ export class HomePage {
       component: ContactActionsComponent,
       event
     });
-    if (this.platform.is('capacitor')) {
-      Haptics.impact({style: HapticsImpactStyle.Light});
-    }
+    Haptics.vibrate();
     await popover.present();
     const {data} = await popover.onDidDismiss();
     if (data === `delete`) {
@@ -60,25 +58,17 @@ export class HomePage {
   }
 
   private async deleteContact(contact: Contact) {
-    const alert = await this.alertController.create({
-      header: 'Confirmation',
+    const confirmRet = await Modals.confirm({
+      title: 'Confirmation',
       message: `Are you sure you want to delete '${contact.name}'`,
-      buttons: [{
-        text: 'Yes',
-        role: 'confirm',
-        cssClass: 'primary',
-        handler: (blah) => {
-          this.contactsService.delete(contact.id)
-              .subscribe(() => this.getAllContacts());
-        }
-      }, {
-        text: 'Cancel',
-        role: 'cancel',
-        cssClass: 'danger'
-      }
-      ]
+      cancelButtonTitle: `Cancel`,
+      okButtonTitle: `Delete`
     });
-    await alert.present();
+    if (confirmRet.value) {
+      this.contactsService.delete(contact.id)
+          .subscribe(() => this.getAllContacts());
+    }
+
   }
 
   trackFunction(index: number, contact: Contact) {

@@ -23,7 +23,7 @@
                 </ion-item>
                 <br>
                 <div class="ion-padding">
-                    <ion-button expand="block" type="submit" class="ion-no-margin">Create a contact</ion-button>
+                    <ion-button [disabled]="userForm.invalid" expand="block" type="submit" class="ion-no-margin">Create a contact</ion-button>
                 </div>
             </ion-list>
         </form>

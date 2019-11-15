@@ -3,6 +3,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ContactsService} from '../services/contacts.service';
 import {Router} from '@angular/router';
 import {ToastController} from '@ionic/angular';
+import {Plugins} from '@capacitor/core';
+
+const {Toast} = Plugins;
 
 @Component({
   selector: 'app-add-contact',
@@ -51,23 +54,10 @@ export class AddContactPage implements OnInit {
     if (this.userForm.valid) {
       this.contactsService.createContact(user.name, user.phone)
           .subscribe(async (res) => {
-            const toast = await this.toastController.create({
-              message: 'Contact have been created',
-              duration: 2000,
-              position: 'bottom',
-              animated: true,
-              color: 'dark',
-              buttons: [
-                {
-                  text: 'Close',
-                  role: 'close',
-                  handler: () => {
-                    toast.dismiss();
-                  }
-                }
-              ]
+            await Toast.show({
+              text: 'Contact have been created',
+              duration: 'short'
             });
-            await toast.present();
             this.router.navigateByUrl('/');
           });
     }
