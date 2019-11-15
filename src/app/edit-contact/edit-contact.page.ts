@@ -2,8 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ContactsService} from '../services/contacts.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ToastController} from '@ionic/angular';
 import {Contact} from '../models/contact.model';
+import {Plugins} from '@capacitor/core';
+
+const {Toast} = Plugins;
 
 @Component({
     selector: 'app-edit-contact',
@@ -20,7 +22,6 @@ export class EditContactPage implements OnInit {
         private readonly contactsService: ContactsService,
         private readonly router: Router,
         private readonly activatedRoute: ActivatedRoute,
-        private readonly toastController: ToastController
     ) {
     }
 
@@ -64,23 +65,10 @@ export class EditContactPage implements OnInit {
                 id: this.contact.id
             } as unknown as Contact)
                 .subscribe(async (res) => {
-                    const toast = await this.toastController.create({
-                        message: 'Contact have been updated',
-                        duration: 2000,
-                        position: 'bottom',
-                        animated: true,
-                        color: 'dark',
-                        buttons: [
-                            {
-                                text: 'Close',
-                                role: 'close',
-                                handler: () => {
-                                    toast.dismiss();
-                                }
-                            }
-                        ]
+                    await Toast.show({
+                        text: 'Contact have been updated',
+                        duration: 'short'
                     });
-                    await toast.present();
                     this.router.navigateByUrl('/');
                 });
         }

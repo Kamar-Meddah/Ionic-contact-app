@@ -22,7 +22,7 @@
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <div *ngIf="!((contactList$ |async))"
-         style="width: 90px;height: 90px;position: absolute;top:50%;left:50%;transform: translate(-50%,-50%);width: 80%;text-align: center">
+         style="height: 90px;position: absolute;top:50%;left:50%;transform: translate(-50%,-50%);width: 80%;text-align: center">
       <ion-spinner color="primary"  style="width: 90px;height: 90px;"></ion-spinner>
     </div>
     <ion-list *ngFor="let contact of (contactList$|async);trackBy:trackFunction">

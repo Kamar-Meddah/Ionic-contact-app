@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {ContactsService} from '../services/contacts.service';
 import {Observable} from 'rxjs';
 import {Contact} from '../models/contact.model';
-import {AlertController, Platform, PopoverController} from '@ionic/angular';
+import {Platform, PopoverController} from '@ionic/angular';
 import {ContactActionsComponent} from './components/contact-actions/contact-actions.component';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
@@ -25,7 +25,6 @@ export class HomePage {
       private readonly popoverController: PopoverController,
       private readonly platform: Platform,
       private readonly router: Router,
-      private readonly alertController: AlertController
   ) {
   }
 
@@ -47,7 +46,9 @@ export class HomePage {
       component: ContactActionsComponent,
       event
     });
-    Haptics.vibrate();
+    if (this.platform.is('capacitor')) {
+      Haptics.vibrate();
+    }
     await popover.present();
     const {data} = await popover.onDidDismiss();
     if (data === `delete`) {
