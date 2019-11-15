@@ -1,8 +1,14 @@
 export class Contact {
 
-    private id: string;
-    private name: string;
-    private phone: string;
+    public id: string;
+    public name: string;
+    public phone: string;
+
+    constructor(name?: string, phone?: string) {
+        this.name = name;
+        this.phone = phone;
+        this.id = crypto.getRandomValues(new Uint8Array(10)).join('');
+    }
 
 
     public getId(): string {
