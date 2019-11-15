@@ -1,7 +1,7 @@
 {
-  "name": "app",
+  "name": "Tp DAMC",
   "short_name": "app",
-  "theme_color": "#1976d2",
+  "theme_color": "#038dcd",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",

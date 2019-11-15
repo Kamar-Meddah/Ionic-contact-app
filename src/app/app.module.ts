@@ -15,10 +15,9 @@ import {environment} from '../environments/environment';
 
 export class MyHammerConfig extends HammerGestureConfig {
   buildHammer(element: HTMLElement) {
-    const mc = new Hammer(element, {
+    return new Hammer(element, {
       touchAction: 'pan-y',
     });
-    return mc;
   }
 }
 

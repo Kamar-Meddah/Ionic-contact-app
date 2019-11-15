@@ -27,7 +27,7 @@
     </div>
     <ion-virtual-scroll [items]="contactList$|async" approxItemHeight="65">
       <ion-card *virtualItem="let contact;" class="ion-activatable">
-        <ion-item (press)="showPopup($event,contact)">
+        <ion-item (press)="showPopup($event,contact)" lines="none">
           <ion-avatar>
             <ngx-avatar size="42" [name]="contact.name"></ngx-avatar>
           </ion-avatar>
