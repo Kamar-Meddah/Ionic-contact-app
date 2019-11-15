@@ -1,5 +1,5 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig} from '@angular/platform-browser';
 import {RouteReuseStrategy} from '@angular/router';
 
 import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
@@ -10,8 +10,17 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {IonicStorageModule} from '@ionic/storage';
 import {AvatarModule} from 'ngx-avatar';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {environment} from '../environments/environment';
+
+export class MyHammerConfig extends HammerGestureConfig {
+  buildHammer(element: HTMLElement) {
+    const mc = new Hammer(element, {
+      touchAction: 'pan-y',
+    });
+    return mc;
+  }
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +36,8 @@ import { environment } from '../environments/environment';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+    {provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig}
   ],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]

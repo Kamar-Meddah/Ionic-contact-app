@@ -9,6 +9,7 @@ import {AvatarModule} from 'ngx-avatar';
 import {HttpClientModule} from '@angular/common/http';
 import {ContactActionsComponent} from './components/contact-actions/contact-actions.component';
 
+
 @NgModule({
     imports: [
         CommonModule,
@@ -25,6 +26,6 @@ import {ContactActionsComponent} from './components/contact-actions/contact-acti
         ])
     ],
     declarations: [HomePage, ContactActionsComponent],
-    entryComponents:[ContactActionsComponent]
+    entryComponents: [ContactActionsComponent]
 })
 export class HomePageModule {}

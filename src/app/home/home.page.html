@@ -17,27 +17,30 @@
 
 <ion-content fullscreen>
 
-  <div class="ion-padding">
+  <div class="ion-padding-top ion-padding-bottom">
     <ion-refresher slot="fixed" (ionRefresh)="pullToRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <div *ngIf="!((contactList$ |async))"
-         style="height: 90px;position: absolute;top:50%;left:50%;transform: translate(-50%,-50%);width: 80%;text-align: center">
+    <div *ngIf="!(contactList$ |async)"
+         style="z-index:9999;height: 90px;position: absolute;top:50%;left:50%;transform: translate(-50%,-50%);width: 80%;text-align: center">
       <ion-spinner color="primary"  style="width: 90px;height: 90px;"></ion-spinner>
     </div>
-    <ion-list *ngFor="let contact of (contactList$|async);trackBy:trackFunction">
-      <ion-item (press)="showPopup($event,contact)" class="ion-activatable">
-        <ion-avatar>
-          <ngx-avatar size="42" [name]="contact.name"></ngx-avatar>
-        </ion-avatar>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <ion-label>
-          <h2>{{contact.name}}</h2>
-          <h3>{{contact.phone}}</h3>
-        </ion-label>
-        <ion-ripple-effect type="unbounded"></ion-ripple-effect>
-      </ion-item>
-    </ion-list>
+    <ion-virtual-scroll [items]="contactList$|async" approxItemHeight="65">
+      <ion-card *virtualItem="let contact;" class="ion-activatable">
+        <ion-item (press)="showPopup($event,contact)">
+          <ion-avatar>
+            <ngx-avatar size="42" [name]="contact.name"></ngx-avatar>
+          </ion-avatar>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <ion-label>
+            <h2>{{contact.name}}</h2>
+            <h3>{{contact.phone}}</h3>
+          </ion-label>
+          <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+        </ion-item>
+      </ion-card>
+    </ion-virtual-scroll>
+
     <div *ngIf="(contactList$|async)?.length===0"
          style="position: absolute;top:50%;left:50%;transform: translate(-50%,-50%);width: 80%;text-align: center">
       <h3>No Contact have been found</h3>
