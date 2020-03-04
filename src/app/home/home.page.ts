@@ -48,7 +48,8 @@ export class HomePage {
     });
     if (this.platform.is('capacitor')) {
       Haptics.vibrate();
-    } else if(this.platform.is('pwa')){
+    } else {
+      console.log("jjj")
       await navigator.vibrate(100);
     }
     await popover.present();

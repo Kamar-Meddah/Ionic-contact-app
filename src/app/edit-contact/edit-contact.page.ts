@@ -49,8 +49,9 @@ export class EditContactPage implements OnInit {
                 '',
                 Validators.compose([
                     Validators.required,
+                    Validators.pattern(`[(\+)]?[0-9]{10,13}`),
                     Validators.minLength(10),
-                    Validators.maxLength(10)
+                    Validators.maxLength(15)
                 ])
             ]
         });
