@@ -1,3 +1,6 @@
 .ion-activatable{
   overflow: visible;
 }
+ion-virtual-scroll{
+  height: calc(100vh - 164px) !important;
+}
